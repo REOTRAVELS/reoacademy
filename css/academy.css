@@ -216,10 +216,13 @@ input, select { font-family: inherit; }
     linear-gradient(100deg, rgba(7,34,31,0.94) 0%, rgba(7,34,31,0.78) 40%, rgba(7,34,31,0.3) 78%, rgba(7,34,31,0.5) 100%),
     linear-gradient(to top, rgba(7,34,31,0.9) 0%, rgba(7,34,31,0.15) 45%);
 }
-.flight-path { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.5; }
-.flight-path svg { width: 100%; height: 100%; }
+.flight-path { position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.5; overflow: hidden; }
+.flight-path svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.flight-path .route-mobile { display: none; }
+.flight-path .route-desktop { display: block; }
 .flight-path .dash {
   fill: none; stroke: var(--amber); stroke-width: 1.5; stroke-dasharray: 8 10; opacity: 0.4;
+  vector-effect: non-scaling-stroke;
 }
 
 .hero-inner {
@@ -668,6 +671,12 @@ input, select { font-family: inherit; }
 .chat-gate-note.show { display: block; }
 
 @media (max-width: 640px) {
+  .flight-path { opacity: 0.35; }
+  .flight-path .route-desktop { display: none; }
+  .flight-path .route-mobile { display: block; }
+  .flight-path .dash { stroke-width: 1.75; stroke-dasharray: 2 9; stroke-linecap: round; opacity: 0.55; }
+  .flight-path .plane { filter: drop-shadow(0 0 6px rgba(226, 162, 60, 0.9)); }
+  #hero { min-height: 100svh; }
   .modal-facts { grid-template-columns: 1fr; }
   .modal-actions .btn { flex: 1 1 100%; }
   .about-badge { max-width: calc(100% - 32px); }

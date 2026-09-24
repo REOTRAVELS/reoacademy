@@ -50,11 +50,19 @@
     <div class="hero-overlay"></div>
 
     <div class="flight-path" aria-hidden="true">
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
-        <path id="route" class="dash" d="M -50,650 C 300,750 550,250 900,400 S 1400,150 1500,120" />
+      <svg class="route-desktop" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path id="route-desktop" class="dash" d="M -50,650 C 300,750 550,250 900,400 S 1400,150 1500,120" />
         <circle class="plane" r="4" fill="#E2A23C">
           <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
-            <mpath href="#route" />
+            <mpath xlink:href="#route-desktop" href="#route-desktop" />
+          </animateMotion>
+        </circle>
+      </svg>
+      <svg class="route-mobile" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path id="route-mobile" class="dash" d="M -30,620 C 70,600 90,520 150,490 S 250,460 270,360 S 340,220 430,190" />
+        <circle class="plane" r="5" fill="#E2A23C">
+          <animateMotion dur="7s" repeatCount="indefinite" rotate="auto">
+            <mpath xlink:href="#route-mobile" href="#route-mobile" />
           </animateMotion>
         </circle>
       </svg>
@@ -62,7 +70,7 @@
 
     <div class="hero-inner">
       <span class="eyebrow">REO Travel Academy</span>
-      <h1 class="hero-headline">Your career in <em>travel</em> takes off here</h1>
+      <h1 class="hero-headline">Your career in the <em>travel industry</em> takes off here</h1>
       <p class="hero-sub">Practical, in-depth training for the travel business — agency management, customer
         relations, and HR — taught by the team behind a working travel agency. Start from zero or sharpen the
         skills you already use.</p>
