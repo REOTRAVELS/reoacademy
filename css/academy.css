@@ -588,12 +588,31 @@ input, select { font-family: inherit; }
 .faq-body p { font-size: clamp(0.8rem, 1.1vw, 0.87rem); color: var(--ink-soft); line-height: 1.75; }
 
 #final-cta {
-  background: var(--teal-deep);
+  background: var(--paper);
   position: relative;
-  overflow: hidden;
   text-align: center;
   color: var(--white);
 }
+#final-cta .container {
+  background: radial-gradient(120% 140% at 50% 0%, var(--navy-mid) 0%, var(--teal-deep) 58%) , var(--teal-deep);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 193, 7, 0.45);
+  outline: 1px solid rgba(31, 45, 47, 0.14);
+  outline-offset: 10px;
+  border-radius: var(--radius-lg);
+  padding: clamp(44px, 6vw, 76px) clamp(24px, 5vw, 64px);
+  box-shadow: var(--shadow-md), 0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+#final-cta .container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(420px 200px at 15% 10%, rgba(255,193,7,0.16), transparent 70%),
+              radial-gradient(520px 240px at 88% 90%, rgba(30,136,229,0.18), transparent 70%);
+}
+#final-cta .container > * { position: relative; z-index: 1; }
 #final-cta .eyebrow { color: var(--amber); }
 #final-cta .section-title { color: var(--white); }
 #final-cta .section-sub { color: rgba(255,255,255,0.72); }
@@ -601,6 +620,7 @@ input, select { font-family: inherit; }
 
 #footer {
   background: var(--footer-bg);
+  border-top: 1px solid rgba(255, 193, 7, 0.35);
   color: rgba(255,255,255,0.7);
   padding: clamp(48px, 8vw, 88px) clamp(20px, 5vw, 80px) clamp(24px, 4vw, 36px);
 }
