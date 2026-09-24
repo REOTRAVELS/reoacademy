@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>REO Travel Academy — Learn. Lead. Excel.</title>
+  <meta name="description"
+    content="REO Travel Academy trains aspiring and current travel consultants in travel agency management, customer relations, and HR — online & physical, with intakes all year round." />
+  <meta name="author" content="REO Travels & Tour" />
+  <link rel="icon" type="image/png" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="logo-180.png" />
+  <link rel="stylesheet" href="css/academy.css" />
+</head>
+
+<body>
+  <div id="top"></div>
+
+  <div id="preloader">
+    <img class="pre-logo" src="reo.png" alt="REO Travel Academy logo" />
+    <div class="pre-track"><div class="pre-fill"></div></div>
+    <p class="pre-text">Boarding&hellip;</p>
+  </div>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="#top"><img src="reo.png" alt="REO Travel Academy logo" />REO Travel <span>Academy</span></a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#courses" class="btn btn-primary" style="padding:11px 24px;font-size:0.8rem;" id="nav-cta">Enroll Now</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
+    <a href="#about">About</a>
+    <a href="#how">How It Works</a>
+    <a href="#courses">Courses</a>
+    <a href="#faq">FAQ</a>
+    <a href="#courses">Enroll Now</a>
+  </div>
+
+  <section id="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=80"
+        alt="Aircraft wing above the clouds at sunset" />
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="flight-path" aria-hidden="true">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
+        <path id="route" class="dash" d="M -50,650 C 300,750 550,250 900,400 S 1400,150 1500,120" />
+        <circle class="plane" r="4" fill="#E2A23C">
+          <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#route" />
+          </animateMotion>
+        </circle>
+      </svg>
+    </div>
+
+    <div class="hero-inner">
+      <span class="eyebrow">REO Travel Academy</span>
+      <h1 class="hero-headline">Your career in <em>travel &amp; aviation</em> takes off here</h1>
+      <p class="hero-sub">Practical, in-depth training for the travel business — agency management, customer
+        relations, and HR — taught by the team behind a working travel agency. Start from zero or sharpen the
+        skills you already use.</p>
+      <div class="hero-actions">
+        <a href="#courses" class="btn btn-primary">Explore Courses</a>
+        <button type="button" class="btn btn-hero-ghost" onclick="toggleChat()">✈ Chat With Us</button>
+      </div>
+    </div>
+
+    <div class="scroll-cue">Scroll</div>
+  </section>
+
+  <div class="ticker-strip" aria-hidden="true">
+    <div class="ticker-inner">
+      <span>Diploma in Travel Agency Management</span><span>Customer Relations Certification</span><span>Human Resource Management Certification</span>
+      <span>Diploma in Travel Agency Management</span><span>Customer Relations Certification</span><span>Human Resource Management Certification</span>
+    </div>
+  </div>
+
+  <section id="about" class="section-pad">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-media">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80"
+            alt="A training session at REO Travel Academy" />
+          <div class="about-badge">
+            <strong>Built for Real-World Practice</strong>
+            <span>Go beyond theory with practical knowledge designed for the realities of the travel industry.</span>
+          </div>
+        </div>
+        <div class="about-copy">
+          <span class="eyebrow">Who we are</span>
+          <h2 class="section-title">Training built on <span class="accent">real practice</span></h2>
+          <p class="section-sub">REO Travel Academy is a training institution focused on teaching in-depth skills
+            across every aspect of the travel business and aviation industry. We offer a range of course options for
+            anyone who wants to expand their knowledge of the travel industry — whether that means sharpening skills
+            already in use, or starting from zero.</p>
+          <h3 class="who-title">Who is this for?</h3>
+          <div class="who-list">
+            <div class="who-item glass-card"><span class="tag">01</span>Current travel consultants seeking advanced knowledge</div>
+            <div class="who-item glass-card"><span class="tag">02</span>New, aspiring travel consultants</div>
+            <div class="who-item glass-card"><span class="tag">03</span>Individuals growing a career in the travel industry</div>
+            <div class="who-item glass-card"><span class="tag">04</span>Individuals looking to start a travel business</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <section id="how" class="section-pad">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-title">Start in <span class="accent">four simple steps</span></h2>
+        <p class="section-sub">No guesswork, no long forms to figure out — here's exactly how you go from
+          "thinking about it" to learning with us.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-num">01</span>
+          <span class="wc-icon">🎯</span>
+          <h3>Pick your programme</h3>
+          <p>The 10-week Diploma, or a focused certification in Customer Relations or Human Resources — whichever
+            fits your goal.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">02</span>
+          <span class="wc-icon">📝</span>
+          <h3>Register</h3>
+          <p>Register on any course page or message us on WhatsApp — we'll confirm your spot and send your
+            onboarding details.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">03</span>
+          <span class="wc-icon">💻</span>
+          <h3>Join online or in person</h3>
+          <p>Every programme runs in both modes, so you can learn from anywhere — or attend in person if you're
+            local.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-num">04</span>
+          <span class="wc-icon">🎓</span>
+          <h3>Learn. Lead. Excel.</h3>
+          <p>Walk away with practical, industry-ready skills you can put to work immediately in the travel
+            business.</p>
+        </div>
+      </div>
+      <div class="steps-cta">
+        <a href="#courses" class="btn btn-primary">Choose a Course</a>
+        <button type="button" class="btn btn-ghost" onclick="toggleChat()">💬 Ask a question</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="intakes" class="section-pad" style="padding-top:0;">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">Year-round intakes</span>
+        <h2 class="section-title">Four seasons, <span class="accent">one runway</span></h2>
+      </div>
+      <div class="gates-row">
+        <div class="gate-card glass-card"><span class="gate-num">GATE 01</span><h4>Winter</h4><span class="months">January – March</span></div>
+        <div class="gate-card glass-card"><span class="gate-num">GATE 02</span><h4>Spring</h4><span class="months">April – June</span></div>
+        <div class="gate-card glass-card"><span class="gate-num">GATE 03</span><h4>Summer</h4><span class="months">July – September</span></div>
+        <div class="gate-card glass-card"><span class="gate-num">GATE 04</span><h4>Fall</h4><span class="months">October – December</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="courses" class="section-pad">
+    <div class="container">
+      <div class="text-center">
+        <span class="eyebrow">Programmes</span>
+        <h2 class="section-title">Choose your <span class="accent">path</span></h2>
+        <p class="section-sub">One flagship diploma, two focused certifications — with intakes opening all year
+          round.</p>
+      </div>
+      <div class="courses-grid" id="courses-grid" style="margin-top:48px;">
+      </div>
+    </div>
+  </section>
+
+  <div class="modal-overlay" id="course-modal-overlay">
+    <div class="course-modal" id="course-modal-body"></div>
+  </div>
+
+  <section id="faq" class="section-pad">
+    <div class="container">
+      <div class="faq-layout">
+        <aside class="faq-aside">
+          <div class="faq-media">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1000&q=80"
+              alt="An instructor leading a session" loading="lazy" />
+          </div>
+          <h2 class="section-title">Still have <span class="accent">questions?</span></h2>
+          <p class="section-sub">Can't find what you're looking for? Skip the search and talk to a real person — we
+            usually reply within 10 minutes.</p>
+          <div class="faq-actions">
+            <button type="button" class="btn btn-primary" onclick="toggleChat()">💬 Open Live Chat</button>
+            <a href="https://wa.me/2349134458065" target="_blank" class="btn btn-ghost">WhatsApp Us →</a>
+          </div>
+        </aside>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary>Do I need prior travel industry experience?<span class="faq-icon">+</span></summary>
+            <div class="faq-body"><p>No. Our programmes are built for both newcomers and current travel consultants —
+              the Diploma starts from the fundamentals before moving into operations.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Diploma vs. Certification — what's the difference?<span class="faq-icon">+</span></summary>
+            <div class="faq-body"><p>The Diploma is our full 8-course, 10-week programme covering the whole business.
+              The Certifications are focused 3–4 week programmes on one area — customer relations or HR.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Can I attend online if I'm not in Lagos?<span class="faq-icon">+</span></summary>
+            <div class="faq-body"><p>Yes — every programme runs online &amp; physical, so you can join live sessions
+              from anywhere or attend in person if you're local.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>What happens after I register?<span class="faq-icon">+</span></summary>
+            <div class="faq-body"><p>You'll get a confirmation with payment and onboarding details for the next
+              cohort. You can also message us on WhatsApp with any questions first.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Is there a payment plan?<span class="faq-icon">+</span></summary>
+            <div class="faq-body"><p>Reach out to us directly — we're happy to discuss a plan that works for your
+              intake.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Will this help me start my own travel business?<span class="faq-icon">+</span></summary>
+            <div class="faq-body"><p>Yes — the Diploma covers entrepreneurship and business management alongside the
+              operational skills, for people planning to start their own agency.</p></div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="final-cta" class="section-pad">
+    <div class="container">
+      <span class="eyebrow">Admissions open</span>
+      <h2 class="section-title">Ready to learn, lead, excel?</h2>
+      <p class="section-sub" style="margin:16px auto 0;">Reach out to secure your spot, or explore the programmes
+        above to find the right fit first.</p>
+      <div class="cta-actions">
+        <a href="#courses" class="btn btn-primary">View Programmes</a>
+        <a href="mailto:info.academy@reotravelsandtours.org" class="btn btn-ghost" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.3);color:#fff;">✉️ Email the Academy</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#top"><img src="reo.png" alt="REO Travel Academy logo" />REO Travel <span>Academy</span></a>
+        <p>Learn. Lead. Excel. A training institution for the travel business and aviation industry, run by REO
+          Travels &amp; Tour.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#about">About the Academy</a></li>
+          <li><a href="#how">How It Works</a></li>
+          <li><a href="#courses">Programmes</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programmes</h4>
+        <ul>
+          <li><a href="#" onclick="openCourseModal('diploma');return false;">Diploma in Travel Agency Management</a></li>
+          <li><a href="#" onclick="openCourseModal('crm');return false;">Customer Relations Certification</a></li>
+          <li><a href="#" onclick="openCourseModal('hrm');return false;">Human Resources Certification</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/2349134458065" target="_blank">+234 913 445 8065 (WhatsApp)</a></li>
+          <li><a href="mailto:info.academy@reotravelsandtours.org">info.academy@reotravelsandtours.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footer-year">2026</span> REO Travel Academy — a programme of REO Travels &amp; Tour. All
+        rights reserved.</p>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <button class="chat-launcher" onclick="toggleChat()" aria-label="Chat with us">
+    ✈<span class="chat-dot" id="chat-dot"></span>
+  </button>
+
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-head">
+      <div class="chat-head-avatar"><img src="logo-64.png" alt="REO Travel Academy logo" /></div>
+      <div>
+        <strong>REO Travel Academy</strong>
+        <span>Typically replies within 10 minutes</span>
+      </div>
+      <button class="chat-head-close" onclick="toggleChat()" aria-label="Close chat">&times;</button>
+    </div>
+
+    <div class="chat-gate" id="chat-gate">
+      <div class="chat-gate-card">
+        <div class="chat-gate-icon">🎓</div>
+        <h4>Before we begin ✈️</h4>
+        <p>What should we call you? We answer instantly from our course info and bring in a real person whenever you need one — a name keeps it personal.</p>
+        <form id="chat-gate-form">
+          <input type="text" id="chat-gate-input" placeholder="e.g. Chinedu Okafor" autocomplete="name"
+            maxlength="60" />
+          <button type="submit">Start chatting →</button>
+        </form>
+        <span class="chat-gate-note" id="chat-gate-note">Please type your name so we know who we're chatting
+          with 🙂</span>
+      </div>
+    </div>
+
+    <div class="chat-body" id="chat-body">
+      <div class="chat-msg system">Today</div>
+    </div>
+    <form class="chat-foot" id="chat-form">
+      <input type="text" id="chat-input" placeholder="Type a message…" autocomplete="off" />
+      <button type="submit" aria-label="Send">➤</button>
+    </form>
+    <div class="chat-fallback">
+      Ask anything — answers are instant from our course info, and we'll hand you over to a real person on
+      <a href="https://wa.me/2349134458065" target="_blank">WhatsApp</a> or email
+      <a href="mailto:info.academy@reotravelsandtours.org">info.academy@reotravelsandtours.org</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="js/academy.js"></script>
+</body>
+
+</html>
