@@ -56,7 +56,7 @@ const COURSES = {
   diploma: {
     flagship: true,
     kicker: "Flagship Programme",
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=80",
+    image: "Images/dip.png",
     imageAlt: "A map and travel plans laid out for a trip",
     title: "Diploma in Travel Agency Management",
     duration: "10 Weeks",
@@ -78,7 +78,7 @@ const COURSES = {
   crm: {
     flagship: false,
     kicker: "Certification Programme",
-    image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80",
+    image: "Images/Customer.jpg",
     imageAlt: "A customer service interaction at a counter",
     title: "Certification in Customer Relations Management",
     duration: "4 Weeks",
@@ -96,7 +96,7 @@ const COURSES = {
   hrm: {
     flagship: false,
     kicker: "Certification Programme",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+    image: "Images/hr.png",
     imageAlt: "A team meeting in a modern office",
     title: "Certification in Human Resources Management",
     duration: "3 Weeks",
@@ -112,12 +112,18 @@ const COURSES = {
   },
 };
 
-const WHO_FOR = [
-  "Current travel consultants seeking advanced knowledge",
-  "New, aspiring travel consultants",
-  "Individuals looking to grow a career in the travel industry",
-  "Individuals looking to start a travel business",
-];
+const WHO_FOR = {
+  crm: [
+    "Individuals looking to focus solely on customer service expertise for the travel industry",
+    "Current customer relationships officers looking to expand into the travel industry",
+    "Current customer relationships personnel looking to enhance their skills in travel customer relationships",
+  ],
+  hrm: [
+    "Individuals looking to focus solely on people management expertise for the travel industry",
+    "Current HR personnel looking to expand into the travel industry",
+    "Current human resource personnel looking to enhance their skills in travel human resources management",
+  ],
+};
 
 function renderCourseCards() {
   const grid = document.getElementById("courses-grid");
@@ -154,12 +160,13 @@ function openCourseModal(key) {
   const overlay = document.getElementById("course-modal-overlay");
   const body = document.getElementById("course-modal-body");
 
-  const whoForHtml = key === "diploma" ? "" : `
+  const whoForList = key === "diploma" ? [] : (WHO_FOR[key] || []);
+  const whoForHtml = whoForList.length ? `
     <div class="modal-section-label">Who is this for?</div>
     <ul class="modal-course-list">
-      ${WHO_FOR.map((w) => `<li>${w}</li>`).join("")}
+      ${whoForList.map((w) => `<li>${w}</li>`).join("")}
     </ul>
-  `;
+  ` : "";
 
   const enquireHref = `mailto:${CONFIG.ACADEMY_EMAIL}?subject=${encodeURIComponent(
     "Enquiry: " + c.title
@@ -427,7 +434,8 @@ function answerFromKB(text) {
   for (const hit of courseHits) {
     if (hit.words.some((w) => q.includes(w))) {
       const c = COURSES[hit.key];
-      return c.title + " — " + c.duration + ", " + c.mode + ". Tuition: " + c.tuition + ".\n" + c.blurb + "\nModules: " + c.modules.join(" • ");
+      const whoFor = (WHO_FOR[hit.key] || []).join("; ");
+      return c.title + " — " + c.duration + ", " + c.mode + ". Tuition: " + c.tuition + ".\n" + c.blurb + "\nModules: " + c.modules.join(" • ") + (whoFor ? "\nWho is this for: " + whoFor + "." : "");
     }
   }
 
@@ -456,7 +464,7 @@ function answerFromKB(text) {
     { k: ["intake", "when can i start", "start date", "when does it begin", "january", "april", "july", "october", "cohort"], a: "Intakes run all year: Winter (Jan–Mar), Spring (Apr–Jun), Summer (Jul–Sep) and Fall (Oct–Dec) — you can join the next available cohort." },
     { k: ["where are you", "address", "location of", "campus", "physical class", "which state"], a: "We're based in Lagos, Nigeria — and every programme also runs online. Our classroom sits right inside REO Travels & Tour, a working travel agency." },
     { k: ["contact", "phone number", "email address", "reach you", "whatsapp number"], a: "WhatsApp us at +234 913 445 8065 or email info.academy@reotravelsandtours.org — we usually reply within 10 minutes." },
-    { k: ["who is this for", "who is this course for", "who can attend", "who can apply", "who can join", "is this for me", "can anyone join", "eligible", "eligibility", "requirements", "aspiring"], a: "It's for current travel consultants sharpening their skills, aspiring consultants, and anyone building a career — or starting a business — in travel." },
+    { k: ["who is this for", "who is this course for", "who can attend", "who can apply", "who can join", "is this for me", "can anyone join", "eligible", "eligibility", "requirements", "aspiring"], a: "It depends on the programme:\n• Customer Relations Certification — " + WHO_FOR.crm.join("; ") + ".\n• Human Resources Certification — " + WHO_FOR.hrm.join("; ") + "." },
     { k: ["how does it work", "how do i start", "how to join", "steps to"], a: "Four easy steps: pick your programme → register on the course page or WhatsApp us → join online or in person → start learning." },
     { k: ["who are you", "about the academy", "what is reo", "about reo"], a: "REO Travel Academy is the training arm of REO Travels & Tour — our classroom is a working travel agency, so you learn exactly what we practise every day." },
     { k: ["modules", "what will i learn", "course content", "syllabus", "curriculum"], a: "Each programme's full module list is on its course card — open 'View details' on the Courses section to see everything covered." },
@@ -504,13 +512,17 @@ function showTyping(show) {
 // anything about the academy (not just courses) without ever inventing
 // something that isn't on the site.
 function buildAIFacts() {
-  const courses = Object.values(COURSES).map(
-    (c) => c.title + ": " + c.duration + ", " + c.mode + ", tuition " + c.tuition + ". " + c.blurb + " Modules: " + c.modules.join(", ") + "."
+  const courses = Object.entries(COURSES).map(
+    ([key, c]) => {
+      const whoFor = (WHO_FOR[key] || []).join("; ");
+      return c.title + ": " + c.duration + ", " + c.mode + ", tuition " + c.tuition + ". " + c.blurb + " Modules: " + c.modules.join(", ") + "." + (whoFor ? " Who is this for: " + whoFor + "." : "");
+    }
   );
   return [
     "PROGRAMMES:\n- " + courses.join("\n- "),
     "ABOUT: REO Travel Academy is the training arm of REO Travels & Tour in Lagos, Nigeria. The classroom sits inside a working travel agency, so students learn exactly what the team practises day to day.",
-    "WHO IT'S FOR: " + WHO_FOR.join("; ") + ".",
+    "WHO IT'S FOR (CUSTOMER RELATIONS CERTIFICATION): " + WHO_FOR.crm.join("; ") + ".",
+    "WHO IT'S FOR (HUMAN RESOURCES CERTIFICATION): " + WHO_FOR.hrm.join("; ") + ".",
     "MODE: every programme runs Online & Physical.",
     "INTAKES: all year round — Winter (Jan–Mar), Spring (Apr–Jun), Summer (Jul–Sep), Fall (Oct–Dec).",
     "HOW TO ENROL: pick a programme, register on its course page or via WhatsApp, join online or in person, then start learning. After registering, applicants get a confirmation with payment and onboarding details for the next cohort.",
