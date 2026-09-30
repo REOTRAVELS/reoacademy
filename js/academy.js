@@ -1,5 +1,5 @@
 ﻿const CONFIG = {
-  APPS_SCRIPT_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbzm9-QZK8C48hlCqDOT_b6VBGAgLECVBmmfP11HqxNeRWVMqsKzED795lylZIElqOZV/exec",
+  APPS_SCRIPT_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbwKJMHnTb_M8fNc_z0kaUPQrywpSrSnKT_XIIixEai6DbnwqHON51ZfZ-9gzdYsQdNd/exec",
   ACADEMY_EMAIL: "info.academy@reotravelsandtours.org",
   WHATSAPP_NUMBER: "2349134458065",
   
