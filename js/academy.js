@@ -1,5 +1,5 @@
 ﻿const CONFIG = {
-  APPS_SCRIPT_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbwKJMHnTb_M8fNc_z0kaUPQrywpSrSnKT_XIIixEai6DbnwqHON51ZfZ-9gzdYsQdNd/exec",
+  APPS_SCRIPT_WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbzPsWHYgsqCtO9hyonB2dNj4cswBwdM7MCaBzEHWmCZv_5xuE0T9tUDZDMWaGkc3ShT/exec",
   ACADEMY_EMAIL: "info.academy@reotravelsandtours.org",
   WHATSAPP_NUMBER: "2349134458065",
   
@@ -204,6 +204,12 @@ function openCourseModal(key) {
     </div>
 
     <form class="register-form" id="register-form" onsubmit="return submitRegistration(event, '${key}')">
+      <!-- Anti-bot: honeypot (real people never see or fill this) -->
+      <input type="text" name="hp_field" tabindex="-1" autocomplete="off" aria-hidden="true"
+             style="position:absolute;left:-9999px;height:0;width:0;opacity:0;" />
+      <!-- Anti-bot: set to Date.now() when the form is opened; server rejects instant submits -->
+      <input type="hidden" name="form_opened_at" value="" />
+
       <div class="form-row">
         <input type="text" name="first_name" placeholder="First Name *" required />
         <input type="text" name="last_name" placeholder="Last Name *" required />
@@ -220,14 +226,14 @@ function openCourseModal(key) {
 
       <label class="form-label">Would you be available for physical classes?</label>
       <select name="physical_availability" required>
-        <option value="" disabled>Choose…</option>
+        <option value="" disabled selected>Choose…</option>
         <option value="Yes">Yes — I can attend physical classes</option>
         <option value="No">No — online only</option>
       </select>
 
       <label class="form-label">Preferred intake</label>
       <select name="preferred_intake" required>
-        <option value="" disabled>Choose an intake…</option>
+        <option value="" disabled selected>Choose an intake…</option>
         <option value="Winter (Jan – Mar)">Winter Intake (Jan – Mar)</option>
         <option value="Spring (Apr – Jun)">Spring Intake (Apr – Jun)</option>
         <option value="Summer (Jul – Sep)">Summer Intake (Jul – Sep)</option>
@@ -272,6 +278,8 @@ function toggleRegisterForm() {
   const opening = !form.classList.contains("open");
   form.classList.toggle("open");
   if (opening) {
+    // Start the "human fill time" clock the moment the form is revealed
+    if (form.elements["form_opened_at"]) form.elements["form_opened_at"].value = String(Date.now());
     setTimeout(() => form.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
   }
 }
@@ -286,6 +294,20 @@ function submitRegistration(e, courseKey) {
 
   const data = Object.fromEntries(new FormData(form).entries());
   data.course = c.title;
+
+  // Client-side sanity checks (the server re-checks everything too)
+  const phoneDigits = String(data.phone || "").replace(/\D/g, "");
+  if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+    statusEl.textContent = "⚠️ Please enter a valid phone number (10–15 digits).";
+    statusEl.className = "register-status show err";
+    return false;
+  }
+  if (!data.physical_availability || !data.preferred_intake) {
+    statusEl.textContent = "⚠️ Please choose your class availability and preferred intake.";
+    statusEl.className = "register-status show err";
+    return false;
+  }
+  if (!data.form_opened_at) data.form_opened_at = String(Date.now() - 60000);
 
   btn.disabled = true;
   btn.textContent = "Submitting…";
