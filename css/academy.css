@@ -450,6 +450,10 @@ input, select { font-family: inherit; }
 .modal-price-block { display: flex; align-items: baseline; justify-content: space-between; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 20px 0; }
 .modal-price-block strong { font-family: "Fraunces", serif; font-size: clamp(1.5rem, 2.4vw, 1.85rem); color: var(--teal); }
 .modal-price-block span { font-size: 0.76rem; color: var(--ink-mute); }
+.modal-reg-fee { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; background: var(--paper); border: 1px solid var(--border-soft); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 14px; }
+.modal-reg-fee span { font-family: "IBM Plex Mono", monospace; font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute); }
+.modal-reg-fee strong { font-size: 1rem; color: var(--ink); }
+.modal-reg-fee em { flex-basis: 100%; font-style: normal; font-size: 0.76rem; color: var(--ink-mute); }
 .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
 .modal-actions .btn { flex: 1; min-width: 150px; }
 
