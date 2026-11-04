@@ -1615,21 +1615,31 @@ function handleRegistrationPaid_(d) {
   }
 
   // Confirmation to applicant
-  try {
-    sendMail_({
-      to: String(d.email).trim(),
-      subject: "Registration Fee Received — REO Travel Academy",
-      body: "Hello " + regName + ",\n\nWe have received your registration fee of ₦5,000 for " + course + ". Your registration is NOT complete yet. Please pay the tuition fee of ₦" + tuitionAmount.toLocaleString("en-NG") + " to finish your registration.\n\nPayment reference: " + ref + "\n\n— REO Travel Academy",
-      htmlBody: "<p>Hello " + escapeHtml(regName) + ",</p>" +
-        "<p>We have received your registration fee of <strong>₦5,000</strong> for <strong>" + escapeHtml(course) + "</strong>.</p>" +
-        "<p>Your registration is <strong>NOT complete yet</strong>. Please pay the tuition fee of <strong>₦" + tuitionAmount.toLocaleString("en-NG") + "</strong> to finish your registration.</p>" +
-        "<p><strong>Payment reference:</strong> " + escapeHtml(ref) + "</p>" +
-        "<p>— REO Travel Academy</p>",
-      name: "REO Travel Academy Website",
-    });
-  } catch (err) {
-    Logger.log("Applicant registration-fee confirmation failed: " + err);
-  }
+try {
+  sendMail_({
+    to: String(d.email).trim(),
+    subject: "Registration Fee Received — REO Travel Academy",
+    body: "Hello " + regName + ",\n\n" +
+      "Thank you for choosing REO Travel Academy.\n\n" +
+      "We are pleased to confirm that your registration fee of ₦5,000 has been successfully received for " + course + ".\n\n" +
+      "Our Admissions Team will contact you shortly with further information regarding your application.\n\n" +
+      "Payment reference: " + ref + "\n\n" +
+      "Thank you for your interest in REO Travel Academy.\n\n" +
+      "REO Travel Academy",
+
+    htmlBody: "<p>Hello " + escapeHtml(regName) + ",</p>" +
+      "<p>Thank you for choosing <strong>REO Travel Academy</strong>.</p>" +
+      "<p>We are pleased to confirm that your registration fee of <strong>₦5,000</strong> has been successfully received for <strong>" + escapeHtml(course) + "</strong>.</p>" +
+      "<p>Our Admissions Team will contact you shortly with further information regarding your application.</p>" +
+      "<p><strong>Payment reference:</strong> " + escapeHtml(ref) + "</p>" +
+      "<p>Thank you for your interest in REO Travel Academy.</p>" +
+      "<p><strong>REO Travel Academy</strong></p>",
+
+    name: "REO Travel Academy"
+  });
+} catch (err) {
+  Logger.log("Applicant registration-fee confirmation failed: " + err);
+}
 
   return { success: true, ok: true, stage: "registration_paid", registration_reference: ref, tuition_amount: tuitionAmount, course: course };
 }
