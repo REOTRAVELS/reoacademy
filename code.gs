@@ -1591,6 +1591,46 @@ function handleRegistrationPaid_(d) {
     savePending_(ref, pending);
   }
 
+  const regName = [d.first_name, d.middle_name, d.last_name].filter(Boolean).join(" ");
+
+  // Notify owner that registration fee was paid (separate email)
+  try {
+    sendMail_({
+      to: ACADEMY_EMAIL,
+      subject: "New Registration Fee Paid — " + regName + " (" + course + ")",
+      body: "Registration fee paid.\nName: " + regName + "\nCourse: " + course + "\nEmail: " + String(d.email).trim() + "\nPhone: " + String(d.phone).trim() + "\nRegistration fee received: ₦" + Number(v.paid).toLocaleString("en-NG") + "\nPayment reference: " + ref + "\nStatus: Registration NOT complete — tuition fee still pending.",
+      htmlBody: "<h2 style='color:#0A4F48;margin:0 0 16px;'>New Registration Fee Paid</h2>" +
+        "<p><strong>Name:</strong> " + escapeHtml(regName) + "</p>" +
+        "<p><strong>Course:</strong> " + escapeHtml(course) + "</p>" +
+        "<p><strong>Email:</strong> " + escapeHtml(String(d.email).trim()) + "</p>" +
+        "<p><strong>Phone:</strong> " + escapeHtml(String(d.phone).trim()) + "</p>" +
+        "<p><strong>Registration fee received:</strong> ₦" + Number(v.paid).toLocaleString("en-NG") + "</p>" +
+        "<p><strong>Payment reference:</strong> " + escapeHtml(ref) + "</p>" +
+        "<p style='color:#B45309;'><strong>Status:</strong> Registration NOT complete — tuition fee still pending.</p>",
+      replyTo: d.email || undefined,
+      name: "REO Travel Academy Website",
+    });
+  } catch (err) {
+    Logger.log("Owner registration-fee email failed: " + err);
+  }
+
+  // Confirmation to applicant
+  try {
+    sendMail_({
+      to: String(d.email).trim(),
+      subject: "Registration Fee Received — REO Travel Academy",
+      body: "Hello " + regName + ",\n\nWe have received your registration fee of ₦5,000 for " + course + ". Your registration is NOT complete yet. Please pay the tuition fee of ₦" + tuitionAmount.toLocaleString("en-NG") + " to finish your registration.\n\nPayment reference: " + ref + "\n\n— REO Travel Academy",
+      htmlBody: "<p>Hello " + escapeHtml(regName) + ",</p>" +
+        "<p>We have received your registration fee of <strong>₦5,000</strong> for <strong>" + escapeHtml(course) + "</strong>.</p>" +
+        "<p>Your registration is <strong>NOT complete yet</strong>. Please pay the tuition fee of <strong>₦" + tuitionAmount.toLocaleString("en-NG") + "</strong> to finish your registration.</p>" +
+        "<p><strong>Payment reference:</strong> " + escapeHtml(ref) + "</p>" +
+        "<p>— REO Travel Academy</p>",
+      name: "REO Travel Academy Website",
+    });
+  } catch (err) {
+    Logger.log("Applicant registration-fee confirmation failed: " + err);
+  }
+
   return { success: true, ok: true, stage: "registration_paid", registration_reference: ref, tuition_amount: tuitionAmount, course: course };
 }
 // Handles Step 2 completion: tuition fee verified, record as complete, send emails.
@@ -1669,17 +1709,28 @@ function handleTuitionPaid_(d) {
     savePending_(regRef, regPending);
   }
 
+  const regName = [d.first_name, d.middle_name, d.last_name].filter(Boolean).join(" ");
+
+  // Notify owner that tuition fee was paid (separate email)
   try {
     sendMail_({
       to: ACADEMY_EMAIL,
-      subject: "New PAID Academy Application - " + name + " (registration + tuition paid) (" + d.preferred_intake + ")",
-      body: applicationPlainText(data, name),
-      htmlBody: applicationEmailHtml(data, name),
+      subject: "Tuition Fee Paid — " + regName + " (" + course + ") — Registration Complete",
+      body: "Tuition fee paid.\nName: " + regName + "\nCourse: " + course + "\nEmail: " + String(d.email).trim() + "\nPhone: " + String(d.phone).trim() + "\nTuition fee received: ₦" + Number(v.paid).toLocaleString("en-NG") + "\nTuition reference: " + tuitionRef + "\nRegistration reference: " + regRef + "\nStatus: Registration COMPLETE — both fees paid.",
+      htmlBody: "<h2 style='color:#0A4F48;margin:0 0 16px;'>Tuition Fee Paid — Registration Complete</h2>" +
+        "<p><strong>Name:</strong> " + escapeHtml(regName) + "</p>" +
+        "<p><strong>Course:</strong> " + escapeHtml(course) + "</p>" +
+        "<p><strong>Email:</strong> " + escapeHtml(String(d.email).trim()) + "</p>" +
+        "<p><strong>Phone:</strong> " + escapeHtml(String(d.phone).trim()) + "</p>" +
+        "<p><strong>Tuition fee received:</strong> ₦" + Number(v.paid).toLocaleString("en-NG") + "</p>" +
+        "<p><strong>Tuition payment reference:</strong> " + escapeHtml(tuitionRef) + "</p>" +
+        "<p><strong>Registration reference:</strong> " + escapeHtml(regRef) + "</p>" +
+        "<p style='color:#0A4F48;'><strong>Status:</strong> Registration COMPLETE — both registration and tuition fees paid.</p>",
       replyTo: d.email || undefined,
       name: "REO Travel Academy Website",
     });
   } catch (err) {
-    Logger.log("Owner email failed (application is saved in Payments tab): " + err);
+    Logger.log("Owner tuition-fee email failed: " + err);
   }
   try {
     sendApplicantConfirmation_(data, name);
