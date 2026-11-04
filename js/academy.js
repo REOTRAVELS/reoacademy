@@ -346,6 +346,13 @@ function submitRegistration(e, courseKey) {
     e.preventDefault();
     const form = e.target;
     const c = COURSES[courseKey];
+    try {
+        const prog = JSON.parse(localStorage.getItem("reo-registration-progress") || "null");
+        if (prog && prog.regRef && prog.course === c.title) {
+            handlePaymentReturn(prog.regRef);
+            return false;
+        }
+    } catch (e) { }
     const btn = form.querySelector("button[type=submit]");
 
     const data = Object.fromEntries(new FormData(form).entries());
@@ -441,7 +448,7 @@ async function handlePaymentReturn(refOverride) {
     const returnUrl = () => location.origin + location.pathname;
 
     const showComplete = () => {
-        try { localStorage.removeItem("reo-pending-reg-ref"); } catch (e) { }
+        try { localStorage.removeItem("reo-pending-reg-ref"); localStorage.removeItem("reo-registration-progress"); } catch (e) { }
         cleanUrl();
         render("Registration complete ✅", "Your registration fee and tuition fee have both been received. We'll reach out shortly to confirm your spot and share onboarding details.", [{ label: "Done", primary: true, onClick: close }]);
     };
@@ -477,12 +484,16 @@ async function handlePaymentReturn(refOverride) {
     const showRegistrationPaid = (out) => {
         const regRef = out.registration_reference || ref;
         const tuition = formatNaira(out.tuition_amount || 0);
-        try { localStorage.setItem("reo-pending-reg-ref", regRef); } catch (e) { }
+        try {
+            localStorage.setItem("reo-pending-reg-ref", regRef);
+            localStorage.setItem("reo-registration-progress", JSON.stringify({ regRef: regRef, course: out.course || null, tuitionAmount: out.tuition_amount || 0 }));
+        } catch (e) { }
         render(
             "Registration fee paid successfully ✅",
-            "We've received your registration fee. To complete your registration you must now pay the tuition fee of " + tuition + ".",
+            "We've received your registration fee. Your registration is NOT complete yet — please pay the tuition fee of " + tuition + " to finish. You can pay now or later.",
             [
                 { label: "Pay tuition fee — " + tuition, primary: true, onClick: () => goTuition(regRef) },
+                { label: "Pay later", onClick: close },
             ]
         );
     };

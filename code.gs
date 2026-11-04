@@ -1008,7 +1008,7 @@ function handleCompletePayment_(body) {
     if (row) {
       const course = String(ledger.getRange(row, 5).getValue()).trim();
       const regRef = ref;
-      return { success: true, ok: true, stage: "registration_paid", registration_reference: regRef, tuition_amount: (TUITION_FEES[course] || 0) };
+      return { success: true, ok: true, stage: "registration_paid", registration_reference: regRef, tuition_amount: (TUITION_FEES[course] || 0), course: course };
     }
     return { success: false, ok: false, error: "We couldn't find this payment attempt" };
   }
@@ -1559,7 +1559,7 @@ function handleRegistrationPaid_(d) {
     return { success: true, ok: true, stage: "complete", duplicate: true };
   }
   if (pending && pending.registration_paid) {
-    return { success: true, ok: true, stage: "registration_paid", registration_reference: ref, tuition_amount: tuitionAmount };
+    return { success: true, ok: true, stage: "registration_paid", registration_reference: ref, tuition_amount: tuitionAmount, course: course };
   }
 
   const v = verifyKoraPayment_(ref, course);
@@ -1591,7 +1591,7 @@ function handleRegistrationPaid_(d) {
     savePending_(ref, pending);
   }
 
-  return { success: true, ok: true, stage: "registration_paid", registration_reference: ref, tuition_amount: tuitionAmount };
+  return { success: true, ok: true, stage: "registration_paid", registration_reference: ref, tuition_amount: tuitionAmount, course: course };
 }
 // Handles Step 2 completion: tuition fee verified, record as complete, send emails.
 function handleTuitionPaid_(d) {
